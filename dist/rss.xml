@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Kirby</title><description>Kirby&apos;s Blog</description><link>https://fuwari.vercel.app/</link><language>ko</language><item><title>C5의 학습 여정</title><link>https://fuwari.vercel.app/posts/c_5_learning_journey/</link><guid isPermaLink="true">https://fuwari.vercel.app/posts/c_5_learning_journey/</guid><description>C5의 학습 여정과 과정, 고민을 기록한 글입니다.</description><pubDate>Wed, 20 Aug 2025 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;C5의 학습 여정&lt;/h1&gt;
+&lt;h2&gt;1. 출발점: 왜 문서화를 선택했는가?&lt;/h2&gt;
+&lt;p&gt;이 프로젝트의 초기 동기는 과거 전사 대상으로 기술 발표를 함에 있어 피드백을 받았던 문장에서 부터 시작된다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&quot;시퀀스? SDK? 패키지? 그게 무슨 뜻이에요? 좀 쉽게 설명해주세요&quot;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;기술 문서는 종종 개발자를 위한 문장으로만 작성되기 쉬운데, 나는 그것을 &lt;strong&gt;양측을 잇는 다리로 만들고 싶었다.&lt;/strong&gt; 허나, 문서는 읽는 독자 타게팅을 명확히 해야하니...?&lt;/p&gt;
+&lt;h2&gt;2. 행동 분석 툴로 확장된 문제의식&lt;/h2&gt;
+&lt;p&gt;최근 커피챗을 통해 다음과 같은 이야기를 들었다&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&quot;C1~C4를 진행하며 유저의 피드백을 토대로 개선할 수 없었던 것이 가장 큰 아쉬움&quot;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;이 말은 테크로서 지원해줄 수 있는 방법은 무엇일까 고민하게 되었고, 디자이너가 직감적으로 &quot;이 버튼은 안 눌릴 것 같다&quot;고 판단할 지언정, 그것이 실제 유저의 행동 데이터로 입증되지 않으면 &lt;strong&gt;디자이너 스스로도 확신을 갖기 어렵다.&lt;/strong&gt; 이 문제를 해결하기 위해선 반드시 &lt;strong&gt;계측 가능한 행동 로그&lt;/strong&gt;가 필요하다. 라는 뇌피셜을 거쳐 GA4와 자체 서버 로그 API 시스템에 대해서 생각하게 되기 시작했고, 자체 서버 API는 너무나 방대한 영역이니 자체 기각 후 GA4와 유사한 Amplitude에 대해서 공부하게 된다.&lt;/p&gt;
+&lt;h2&gt;3. 전환점: 단순 가이드를 넘어...?&lt;/h2&gt;
+&lt;p&gt;이전에도 언급했던 것처럼, 문서는 독자를 명확히 해야만 한다. 비개발자가 굳이 프로젝트에 패키지 설치하는 방법을 알아야만 할까?&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;✅ &lt;strong&gt;개발자를 위한 문서&lt;/strong&gt;는 패키지 설치, 이벤트 트래킹 API 사용법 등을 포함한다.&lt;/li&gt;
+&lt;li&gt;✅ &lt;strong&gt;비개발자를 위한 문서&lt;/strong&gt;는 각 툴간의 장단점, 제약사항, 가격 등을 비교하고 툴 선택에 있어 의사결정을 돕는다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;그래서, 문서화 산출물을 위와같이 두 갈래로 나누고자 했다.&lt;/p&gt;
+&lt;p&gt;초기에는 단순한 &lt;strong&gt;툴 세팅 가이드&lt;/strong&gt;를 &lt;a href=&quot;../how-to-setting/&quot;&gt;문서화&lt;/a&gt;했다. Swift 학습에 게을러 아직도 Flutter가 익숙한 나는 Flutter 환경에서 GA4, Amplitude를 세팅하는 방법 안내서를 작성했고, 멘토(Gommin)에게 다음과 같은 피드백을 받았다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;“문서의 난이도가 너무 낮다. 학습이 되지 않을 것&quot;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;이 피드백은 명백히 옳았고, 빠르게 납득했다. 허나, 아 그럼 뭐하지? 하는 생각이 덮쳤고 곰민은 어떻게 이벤트를 설계할지, 툴이 여러개 있을 때, 어떤 파일에서 어떻게 관리할지, 트랙킹할 이벤트 들이 늘어나기 시작하면서 ... 어떻게 관리하면 좋을까?, 툴도 여러개가 될 수 있다, add mob 복잡성 관리 등등의 아이디어를 주었—낯선 것에 대한 공포와 게으름으로 인해 ram영역에 저장되어 휘발되었—다&lt;/p&gt;
+&lt;p&gt;하지만 여기서 의문이 들었다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;이벤트 텍소노미..? 그게 뭐임?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;이 의문은 내 머리채를 잡고 나를 학습의 출발점으로 데려가 앉혔다. 아래 부터는, 내가 새로운 배움과 그로 인한 잘못된 믿음이 깨지는 과정, 내가 알던 지식과의 병합된 산물들... 이라고 볼 수 있을 것이다.&lt;/p&gt;
+&lt;h2&gt;4. 그래서 최종 Deliverable&lt;/h2&gt;
+&lt;p&gt;이러한 문제의식과 학습을 바탕으로 실전 가이드 문서를 작성했다.&lt;/p&gt;
+&lt;p&gt;→ &lt;a href=&quot;../event-taxonomy-guide/&quot;&gt;개발자라면 놓치지 말아야 할 이벤트 설계의 포인트들&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;이 문서에는 다음 내용이 정리되어 있다:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Cross-device 환경에서의 유저 추적&lt;/li&gt;
+&lt;li&gt;CBL을 이용한 이벤트 설계 사고법&lt;/li&gt;
+&lt;li&gt;이벤트 과다의 문제와 우선순위 기준&lt;/li&gt;
+&lt;li&gt;Debounce / Throttle 개념 정리&lt;/li&gt;
+&lt;li&gt;네이밍 전략과 협업을 위한 규칙화&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;5. 메타인지: 나는 지금 어디쯤 와 있는가&lt;/h2&gt;
+&lt;h3&gt;의문 1: 로그인 기능이 있으면 Cross Device 관련 모든 문제가 해결될까?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;No. ID 동기화가 명확하지 않으면 여전히 단절 발생&lt;/li&gt;
+&lt;li&gt;로그인 시점 이전 행동은 별도의 identify 병합을 하지 않으면 소실될 수 있음&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;의문 2: 컴포넌트&amp;amp;생명주기 단위의 이벤트가 항상 안티패턴인가?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;No. 특정 기능의 AB 테스트나 마이크로 UX 분석에서는 유용할 수 있음&lt;/li&gt;
+&lt;li&gt;하지만, 기본 텍소노미에 들어가야 할 이벤트는 &quot;목표 달성 여부&quot; 중심이어야 함&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;의문 3: 이 학습은 지금 필요한가?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;향후 PM/디자이너와 협업에서 의사결정을 할 때 넋 놓고 있을 순 없으니까...&lt;/li&gt;
+&lt;li&gt;이벤트 삽입의 책임은 개발자에게 있으니까...&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;6. 결론: 해석 가능한 로그를 설계한다는 것&lt;/h2&gt;
+&lt;p&gt;이벤트 설계는 한 번의 학습으로 끝나는 주제가 아니라는 것을 공부할수록 느낀다.
+&lt;strong&gt;도메인별, 기능별, 서비스 특성별로 완전히 다른 기준&lt;/strong&gt;이 되어버리기 때문이다.&lt;/p&gt;
+&lt;p&gt;하지만 수확이 있다면,&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;이벤트는 수집이 아니라 해석을 위한 구조 설계다&lt;/li&gt;
+&lt;li&gt;데이터의 노이즈를 줄이기 위해, 심는 것보다 버리는 것이 더 중요할 수 있다&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;그리고 이 글을 끝맺으며, 아직 내가 인지 하지도 못한 &lt;strong&gt;다음 미신&lt;/strong&gt;을 찾아내보기로 한다.&lt;/p&gt;
+</content:encoded></item><item><title>이벤트 설계의 포인트들</title><link>https://fuwari.vercel.app/posts/event_taxonomy_guide/</link><guid isPermaLink="true">https://fuwari.vercel.app/posts/event_taxonomy_guide/</guid><description>개발자라면 놓치지 말아야 할 이벤트 설계의 핵심 포인트와 실전 사례를 정리한 글입니다.</description><pubDate>Wed, 20 Aug 2025 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;개발자라면 놓치지 말아야 할 이벤트 설계의 포인트들&lt;/h1&gt;
+&lt;p&gt;&amp;lt;!-- TOC depthfrom:2 --&amp;gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#%EC%A0%80%EB%8A%94-%EB%94%94%EB%B0%94%EC%9D%B4%EC%8A%A4%EA%B0%80-5%EA%B0%9C-%EC%9E%88%EB%8A%94%EB%8D%B0%EC%9A%94&quot;&gt;저는 디바이스가 5개 있는데요?&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#%EC%9D%B4%EA%B2%8C-%EC%99%9C-%EB%AC%B8%EC%A0%9C%EC%9D%B8%EB%8D%B0&quot;&gt;이게 왜 문제인데?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EA%B8%B0%EB%8A%A5%EC%9D%B4-%EC%9E%88%EB%8B%A4%EB%A9%B4&quot;&gt;로그인 기능이 있다면?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EA%B8%B0%EB%8A%A5%EC%9D%B4-%EC%97%86%EB%8B%A4%EB%A9%B4&quot;&gt;로그인 기능이 없다면?&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#%EC%9D%B4%EB%B2%A4%ED%8A%B8%EC%9D%98-%ED%99%8D%EC%88%98%EC%97%90-%ED%9C%A9%EC%93%B8%EB%A6%AC%EB%8B%A4&quot;&gt;이벤트의 홍수에 휩쓸리다...&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#%EA%B3%BC%EC%8B%9D%EB%B3%B4%EB%8B%A8-%EC%86%8C%EC%8B%9D%EC%9D%B4-%EA%B1%B4%EA%B0%95%EC%97%90-%EC%A2%8B%EB%8B%A4&quot;&gt;과식보단 소식이 건강에 좋다&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#%EC%B0%8C%EB%A5%BC-%EB%95%8C%EB%A7%88%EB%8B%A4-%EB%8F%88%EC%9E%85%EB%8B%88%EB%8B%A4-debounce--throttle&quot;&gt;찌를 때마다 돈입니다... Debounce &amp;amp; Throttle&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EB%84%A4%EC%9D%B4%EB%B0%8D-%EB%B3%80%EC%88%98%EB%AA%85%EB%A7%8C%ED%81%BC-%EC%A4%91%EC%9A%94%ED%95%98%EB%8B%A4&quot;&gt;이벤트 네이밍, 변수명만큼 중요하다&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#%EB%84%A4%EC%9D%B4%EB%B0%8D%EC%9D%B4-%EC%9E%98%EB%AA%BB%EB%90%98%EB%A9%B4&quot;&gt;네이밍이 잘못되면?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#%EA%B7%B8%EB%9E%98%EC%84%9C-%EC%96%B4%EB%96%A4-%EB%B0%A9%EC%8B%9D%EC%9D%B4-%EC%A2%8B%EC%9D%84%EA%B9%8C&quot;&gt;그래서 어떤 방식이 좋을까?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#%EC%A4%91%EC%9A%94%ED%95%9C-%EA%B1%B4-%EC%9D%BC%EA%B4%80%EC%84%B1&quot;&gt;중요한 건 일관성&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&amp;lt;!-- /TOC --&amp;gt;&lt;/p&gt;
+&lt;h2&gt;1. 저는 디바이스가 5개 있는데요?&lt;/h2&gt;
+&lt;p&gt;문제: 하나의 유저가 여러 디바이스에서 활동하면 어떻게 추적할까?&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A라는 유저가 스마트폰 2개와 태블릿, 노트북에서 로그인해서 활동합니다.&lt;/li&gt;
+&lt;li&gt;그런데 클라이언트에서 자동 생성되는 식별자(Device ID)는 디바이스마다 다릅니다.&lt;/li&gt;
+&lt;li&gt;서버에서는 유저 계정 ID(예: user_123)가 기준입니다.&lt;/li&gt;
+&lt;li&gt;이 둘이 연결되지 않으면, Amplitude나 Firebase에서는 동일 유저로 묶이지 않고 서로 다른 사람처럼 보이게 됩니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;이게 왜 문제인데?&lt;/h3&gt;
+&lt;p&gt;앱을 운영함에 있어 유저수를 파악하는 것은 아주 중요한 문제이다.
+예를 들어... 내가 다이어트를 한다고 가정하면 오늘 몇 칼로리를 먹었는지, 운동을 했다면 어떤 종류의 운동을 몇키로 몇회 몇세트를 했는지, 시험 문제풀이를 했다면 어떤 종류의 문제를 얼마큼 풀고 어떤게 틀렸는지를 알고 싶을 것이다.&lt;/p&gt;
+&lt;p&gt;그러나 각각의 카테고리에서 칼로리, 어떤 운동, 문제 푼 기록에 대한 것들이 어딘가로 휘발되어 사라져버렸다면(머릿 속 에서도 사라져 버렸다고 가정하자. 요즘은 디지털 치매의 시대니까) 나의 다이어트... 운동... 시험 준비를 운영함에 있어 아주 큰 장애가 발생하게 될 것이다.&lt;/p&gt;
+&lt;p&gt;그래서, 다시 원점으로 돌아가, 각각의 디바이스에서 나의 이름모를 서비스에 접속한 유저수를 정확하게 파악하는 방법을 탐구해보자!&lt;/p&gt;
+&lt;h3&gt;로그인 기능이 있다면?&lt;/h3&gt;
+&lt;p&gt;로그인 시 &lt;strong&gt;user_id를 명시적으로 설정&lt;/strong&gt;하고, 디바이스마다 발행되는 식별자(device_id)를 해당 user_id와 &lt;strong&gt;identify 병합&lt;/strong&gt;하면 된다. (이른바 맵핑) 이는 Amplitude나 Segment 등 대부분의 툴에서 기본적으로 제공하는 기능이다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;로그인 전: anonymous_id = 디바이스 식별자&lt;/li&gt;
+&lt;li&gt;로그인 후: user_id → 이전 이벤트와 연결&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;로그인 기능이 없다면?&lt;/h3&gt;
+&lt;p&gt;이 경우는 복잡... 혹은 답이 없다. 유저가 동일한 행동을 여러 디바이스에서 했다고 해도, 각 디바이스는 서로 다른 anonymous_id를 갖게 된다. 이 경우 유저 단위 분석이 불가능해질 수 있는데...&lt;/p&gt;
+&lt;p&gt;예외적인 해결책은 있을지도?&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;이메일, 전화번호 등을 활용한 soft-matching (❌ 개인정보 이슈)&lt;/li&gt;
+&lt;li&gt;비정형적 행동 패턴을 통한 Probabilistic Matching (❗비신뢰성)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;결국, 서비스 성격에 따라 &lt;strong&gt;Cross-device tracking이 필요한지 여부를 판단&lt;/strong&gt;해야 하고
+이를 통해 그냥 기획상 존재해서 만들던 로그인 기능의 의미를 다시 한 번 더 생각해 볼 수가 있다.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;2. 이벤트의 홍수에 휩쓸리다...&lt;/h2&gt;
+&lt;p&gt;처음에는 가능하면 많이 다는 것이 좋다고 생각했다. 그러나 좋지 않은 예시들을 보면, &lt;strong&gt;이벤트가 너무 많으면 어떤 정보를 봐야 할지 몰라지는 역효과&lt;/strong&gt;가 발생한다고 하는데...&lt;/p&gt;
+&lt;p&gt;우리는 CBL (Challenge Based Learning)이라는 프레임워크를 접했다. 어떻게 적용해볼까?&lt;/p&gt;
+&lt;p&gt;전 : 유저 행동은 결국 어떤 화면에 접근하고, 어떤 컴포넌트를 누르느냐 아님? 이벤트 다 추적하면 되는 거 아님? 기획자나 뭐.. 아무튼 나 아닌 누군가가 알아서 분석해주겠지!&lt;/p&gt;
+&lt;p&gt;후 : 우리는 왜 유저의 행동을 추적해야하는데? 뭣 땜에? 도대체 뭘 위해서?&lt;/p&gt;
+&lt;p&gt;그렇다. CBL을 하고나니, 이벤트를 심을 생명주기와 컴포넌트가 있으니 냅다 심어버리는 것이 아닌, &lt;strong&gt;왜 이 이벤트를 심는가&lt;/strong&gt;를 먼저 묻는 구조가된다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://amplitude.com/blog/analytics-tracking-practices&quot;&gt;목표와 지표부터 시작하세요&lt;/a&gt;&lt;/strong&gt;
+먼저 평가 기준을 간략하게 설명한 다음 해당 평가 기준에 대해 적절하게 보고해야 하는 이벤트에 대해 간략하게 진행하는 것이 중요합니다. 목표, 지표 및 이벤트 간의 연결이 없으면 실제로 필요하지 않은 추적 계획과 데이터를 망라놓치게 될 가능성이 높으며 비즈니스에 중요한 이벤트를 놓치게 됩니다.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;목표&lt;/th&gt;
+&lt;th&gt;1분기에 인수를 15% 증가&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;미터법&lt;/td&gt;
+&lt;td&gt;전환율 = 가입한 사용자/고유 방문자&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;이벤트&lt;/td&gt;
+&lt;td&gt;가입한 사용자&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;속성&lt;/td&gt;
+&lt;td&gt;user_id, 캠페인, 실험, 참조자 등&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;또한 계측을 위한 이벤트의 우선 순위를 정하는 데 도움이 되며 제품 관리자와 데이터 분석가가 새로운 기능의 목표 또는 성공 지표뿐만 아니라 이를 측정하는 데 필요한 제품에서 필요한 실제 추적으로 어떻게 변환되는지에 대해 생각하도록 할 수 있기를 바랍니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+&lt;h2&gt;3. 과식보단 소식이 건강에 좋다&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;page_view&lt;/code&gt;, &lt;code&gt;onAppear&lt;/code&gt;, &lt;code&gt;onChange&lt;/code&gt; 등 과도하게 붙인 이벤트는 노이즈가 된다&lt;/li&gt;
+&lt;li&gt;지표를 설계하지 않은 이벤트는 &lt;strong&gt;결국 아무도 안 본다&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;예를 들어, &quot;유저가 날씨를 선택했다&quot;는 행동을 &lt;strong&gt;슬라이더를 바꿀 때마다 기록하는가, 저장을 눌렀을 때 한 번 기록하는가&lt;/strong&gt;는 완전히 다른 해석을 낳는다&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;결론적으로는, &lt;strong&gt;사용자 인텐트가 실현된 시점&lt;/strong&gt;에만 이벤트를 로깅해야 한다는 통찰을 얻을 수 있다.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;레퍼런스&lt;/th&gt;
+&lt;th&gt;핵심 메시지&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Woopra&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&quot;https://www.woopra.com/blog/event-tracking-mistakes&quot;&gt;“More data … can make you miss the big truck.” — 지나친 데이터는 핵심 인사이트를 놓치게 하는 함정입니다&lt;/a&gt;.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Amplitude&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&quot;https://amplitude.com/blog/event-tracking-pitfalls&quot;&gt;하나의 이벤트 텍소노미는 &lt;strong&gt;10~200개 이내의 이벤트&lt;/strong&gt;로 구성해야 합니다. 과도한 이벤트는 분석 모델을 해치고 관리도 어려워집니다&lt;/a&gt;.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Databox (GA4)&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&quot;https://databox.com/events-report-google-analytics-4&quot;&gt;GA4에서는 모든 이벤트가 분석에 유의미한 것은 아닙니다. &lt;code&gt;add_to_cart&lt;/code&gt; → &lt;code&gt;purchase&lt;/code&gt; 같은 전환 중심 이벤트에 집중하는 것이 분석의 효율을 높입니다&lt;/a&gt;.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Mando Group&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&quot;https://www.mandogroup.com/news-insights/pitfalls-of-over-implementation&quot;&gt;“데이터 과밀은 오히려 의사결정을 방해합니다. 80%가 직접 활용되지 않는 정크 데이터”&lt;/a&gt;.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr /&gt;
+&lt;h2&gt;4. 찌를 때마다 돈입니다... Debounce &amp;amp; Throttle&lt;/h2&gt;
+&lt;p&gt;유저의 행동은 생각보다 &lt;strong&gt;고빈도&lt;/strong&gt;로 발생한다. 특히 슬라이더, 스크롤, 키 입력, 제스처 등은 사용자가 한 번의 인텐트를 표현하기 위해 수십 번의 이벤트를 발생시킬 수도 있다.&lt;/p&gt;
+&lt;p&gt;이런 경우, 정말 모든 이벤트를 기록해야 할까? 무지성 호출 하기 전에 한번쯤 고려해봐야한다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;예: 유저가 온도 슬라이더를 18도에서 25도로 움직였다고 하자. 이걸 모든 중간 값(19, 20, 21...)으로 로깅해야 할까?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;절대 아니다. 그래서 필요한 것이 &lt;strong&gt;Debounce&lt;/strong&gt;와 &lt;strong&gt;Throttle&lt;/strong&gt; 개념이다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Debounce&lt;/strong&gt;: 이벤트가 연속적으로 발생할 때, 마지막 이벤트만 실행
+→ 예: 유저가 텍스트를 입력할 때, 입력을 멈춘 뒤 1초 후 이벤트 발생&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Throttle&lt;/strong&gt;: 이벤트가 연속적으로 발생할 때, 일정 주기로만 실행
+→ 예: 유저가 스크롤할 때, 500ms 단위로만 이벤트 발생&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;이런 처리를 하지 않으면, 서버나 이벤트 툴이 감당 못할 &lt;strong&gt;로그 폭탄&lt;/strong&gt;이 발생할 수 있다. 실제로 Firebase나 Amplitude에서도 초당 수십 건의 이벤트가 들어오면 &lt;strong&gt;이상 탐지 시스템에 걸리거나 요금 폭탄&lt;/strong&gt;이 나올 수 있다.&lt;/p&gt;
+&lt;p&gt;이벤트를 로깅하는 것은 &lt;strong&gt;사용자 행동을 기록하는 것&lt;/strong&gt;이지만, 그 행동은 &quot;해석 가능한 단위&quot;로 축소되어야 한다. 그게 바로 개발자가 고려해야 할 책임이다.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;5. 이벤트 네이밍, 변수명만큼 중요하다&lt;/h2&gt;
+&lt;p&gt;이벤트 설계에서 종종 간과되는 요소가 바로 &lt;strong&gt;이름&lt;/strong&gt;이다.
+하지만 이름은 그 자체로 &lt;strong&gt;의미를 부여하고 해석을 유도하는 메타데이터&lt;/strong&gt;다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;예: &lt;code&gt;click_button&lt;/code&gt; vs &lt;code&gt;submit_feedback&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;click_button&lt;/code&gt;이라는 이름은 UI의 단순 인터랙션을 설명할 뿐이다.&lt;/li&gt;
+&lt;li&gt;반면, &lt;code&gt;submit_feedback&lt;/code&gt;은 유저의 &lt;strong&gt;의도&lt;/strong&gt;와 &lt;strong&gt;비즈니스 목적&lt;/strong&gt;을 더 명확히 보여준다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;네이밍이 잘못되면?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;협업자가 이벤트 목적을 오해&lt;/strong&gt;한다 (디자이너/PM/데이터 분석가)&lt;/li&gt;
+&lt;li&gt;대시보드 상에서 &lt;strong&gt;해석 가능한 흐름을 구성할 수 없다&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;A/B 테스트나 리텐션 분석 시, &lt;strong&gt;무의미한 지표로 이어질 수 있다&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;그래서 어떤 방식이 좋을까?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;action_object&lt;/code&gt; 형태 → &lt;code&gt;submit_form&lt;/code&gt;, &lt;code&gt;select_plan&lt;/code&gt;, &lt;code&gt;view_screen&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;snake_case 또는 dot.notation → 도구에 따라 제한 있음 (Amplitude는 dot 권장)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;중요한 건 일관성&lt;/h3&gt;
+&lt;p&gt;한 프로젝트 안에서 이벤트 네이밍 방식이 다르면,
+나중에 도대체 &lt;strong&gt;이벤트가 어떤 의미인지&lt;/strong&gt;, 누가 만들었는지, 왜 있는지 파악하는 데만 하루가 걸린다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;이벤트는 이름부터가 해석이다.&lt;/strong&gt;
+따라서, 설계 초기 단계부터 네이밍 룰을 문서화하고 팀과 공유하는 것이 중요하다.&lt;/p&gt;
+</content:encoded></item><item><title>Firebase Analytics vs Amplitude 세팅 가이드</title><link>https://fuwari.vercel.app/posts/how-to-setting/</link><guid isPermaLink="true">https://fuwari.vercel.app/posts/how-to-setting/</guid><description>Flutter 환경에서 Firebase Analytics와 Amplitude를 세팅하는 방법과 실전 예시를 정리한 글입니다.</description><pubDate>Wed, 20 Aug 2025 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;📊 Firebase Analytics vs Amplitude 개발자를 위한 세팅 가이드&lt;/h1&gt;
+&lt;h2&gt;🔍 목적&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Firebase Analytics와 Amplitude를 &lt;strong&gt;Flutter 환경에서 어떻게 세팅하는지&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;설치와 이벤트 트래킹 중심&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;각 플랫폼의 &lt;strong&gt;기본 코드 예제 중심 정리&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;⚙️ Firebase Analytics 세팅 (Flutter 기준)&lt;/h2&gt;
+&lt;h3&gt;1. 패키지 설치&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;dependencies:
+  firebase_core: any
+  firebase_analytics: ^#.##.#
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;2. 초기화 및 인스턴스 준비&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;import &apos;package:firebase_core/firebase_core.dart&apos;;
+import &apos;package:firebase_analytics/firebase_analytics.dart&apos;;
+
+await Firebase.initializeApp(
+  options: DefaultFirebaseOptions.currentPlatform,
+);
+
+FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;3. 사용자 속성 설정 및 이벤트 로깅&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;// 사용자 속성
+analytics.setUserProperty(
+  name: &apos;favorite_season&apos;,
+  value: &apos;summer&apos;,
+);
+
+// 이벤트 로깅
+analytics.logEvent(
+  name: &apos;preferred_temperature_changed&apos;,
+  parameters: {
+    &apos;preference&apos;: 26,
+  },
+);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;🔧 예시 흐름 (선택 위젯과 연계)&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;analytics.setUserProperty(
+  name: &apos;preferred_units&apos;,
+  value: &apos;c&apos;,
+);
+
+analytics.logEvent(
+  name: &apos;hot_or_cold_switch&apos;,
+  parameters: {&apos;value&apos;: &apos;hot&apos;},
+);
+
+analytics.logEvent(
+  name: &apos;rainy_or_sunny_switch&apos;,
+  parameters: {&apos;rainy_or_sunny_switch&apos;: &apos;sun&apos;},
+);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;📁 참고: &lt;code&gt;lib/app_state.dart&lt;/code&gt;, &lt;code&gt;selection_widgets.dart&lt;/code&gt; 내 위젯 연동 구조 확인&lt;/p&gt;
+&lt;h2&gt;⚙️ Amplitude 세팅 (Flutter 기준)&lt;/h2&gt;
+&lt;h3&gt;1. 패키지 설치&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;dependencies:
+  amplitude_flutter: # .##.#
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;2. 초기화&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;import &apos;package:amplitude_flutter/amplitude.dart&apos;;
+import &apos;package:amplitude_flutter/configuration.dart&apos;;
+import &apos;package:amplitude_flutter/default_tracking.dart&apos;;
+
+final analytics = Amplitude(
+  Configuration(
+    apiKey: &apos;YOUR_API_KEY&apos;,
+    defaultTracking: DefaultTrackingOptions.all(),
+  ),
+);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;3. 사용자 정보 설정 및 이벤트 로깅&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;// 사용자 ID 및 디바이스 ID 설정
+analytics.setUserId(&apos;user_123&apos;);
+analytics.setDeviceId(&apos;my_device&apos;);
+
+// 기본 이벤트 로깅
+analytics.track(
+  BaseEvent(&apos;preferred_temperature_changed&apos;),
+);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;4. Identify 사용 (User Property)&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;import &apos;package:amplitude_flutter/events/identify.dart&apos;;
+
+final identify = Identify()
+  ..set(&apos;favorite_season&apos;, &apos;spring&apos;)
+  ..add(&apos;identify_count&apos;, 1);
+
+analytics.identify(identify);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;🧪 Flutter 데모 예시 코드 비교&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Firebase:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;ApplicationState&lt;/code&gt;를 통해 이벤트 트래킹 관리&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;SegmentedButton&lt;/code&gt;, &lt;code&gt;Slider&lt;/code&gt; 등과 연동하여 사용자 입력을 수집&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Amplitude:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;DeviceIdForm&lt;/code&gt;, &lt;code&gt;UserIdForm&lt;/code&gt;, &lt;code&gt;EventForm&lt;/code&gt; 등 컴포넌트 기반&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;identify&lt;/code&gt;, &lt;code&gt;groupIdentify&lt;/code&gt;, &lt;code&gt;revenue&lt;/code&gt; 등 다양한 이벤트 유형 지원&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;📁 참고:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;lib/app_state.dart&lt;/code&gt;, &lt;code&gt;main.dart&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;example/lib/my_app.dart&lt;/code&gt;, &lt;code&gt;event_form.dart&lt;/code&gt;, &lt;code&gt;identify_form.dart&lt;/code&gt; 등&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;✅ 마무리 요약&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;항목&lt;/th&gt;
+&lt;th&gt;Firebase Analytics&lt;/th&gt;
+&lt;th&gt;Amplitude&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;설치 난이도&lt;/td&gt;
+&lt;td&gt;보통&lt;/td&gt;
+&lt;td&gt;쉬움&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;이벤트 로깅&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;logEvent(...)&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;track(...)&lt;/code&gt;, &lt;code&gt;identify(...)&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;사용자 속성&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;setUserProperty(...)&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;Identify().set(...)&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2&gt;📁 참고 링크 모음&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Firebase 데모 프로젝트: &lt;a href=&quot;https://datarian.io/blog/ga-get-demo-account&quot;&gt;GA 데모 계정&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Amplitude 데모 프로젝트: &lt;a href=&quot;https://flood-it.app/&quot;&gt;Flood-it App&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Amplitude 공식: &lt;a href=&quot;https://amplitude.com/ko-kr&quot;&gt;amplitude.com/ko-kr&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content:encoded></item></channel></rss>
