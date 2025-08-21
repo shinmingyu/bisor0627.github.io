@@ -1,14 +1,12 @@
 ---
-title: Firebase Analytics vs Amplitude 세팅 가이드
-published: 2025-08-20
-description: "Flutter 환경에서 Firebase Analytics와 Amplitude를 세팅하는 방법과 실전 예시를 정리한 글입니다."
+title: Firebase Analytics vs Amplitude 개발자를 위한 세팅 가이드
+published: 2025-08-18
+description: "Flutter 환경에서 Firebase Analytics와 Amplitude를 세팅하는 방법"
 image: ""
-tags: ["Firebase", "Amplitude", "Analytics"]
+tags: ["Firebase", "Amplitude", "Analytics", "Flutter"]
 category: Guide
 draft: false
 ---
-
-# 📊 Firebase Analytics vs Amplitude 개발자를 위한 세팅 가이드
 
 ## 🔍 목적
 
