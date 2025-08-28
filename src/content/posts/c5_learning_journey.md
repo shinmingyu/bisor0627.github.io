@@ -3,8 +3,8 @@ title: C5의 학습 여정
 published: 2025-08-20
 description: "C5의 학습 여정과 과정"
 image: ""
-tags: ["Learning", "Journey"]
-category: Reflection
+tags: ["회고"]
+category: 회고
 draft: false
 ---
 
